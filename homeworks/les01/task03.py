@@ -7,9 +7,11 @@
 value = int(input('Введите целое положительное число: '))
 digit_max = 0
 while value > 0:
+    # остаток от деления на 10 - это текущий 1 разряд
     digit = value % 10
     if digit > digit_max:
         digit_max = digit
+    # делим на 10 на цело - сдвиг на 1 разряд
     value //= 10
 print('Самая большую цифра в числе: ', digit_max)
 
