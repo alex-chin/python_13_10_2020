@@ -4,8 +4,6 @@
  Используйте форматирование строк.
 """
 
-from datetime import time, tzinfo, timedelta
-
 seconds = int(input('Введите время в секундах: '))
 
 num_hours = seconds // 3600
