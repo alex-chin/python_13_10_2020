@@ -4,5 +4,11 @@
  Используйте форматирование строк.
 """
 
-second = int(input('Введите время в секундах: '))
-print(f'Введено время: {second//(60*60)}:{(second-second//(60*60))//60}:{second - second-second//(60*60)//60}')
+seconds = int(input('Введите время в секундах: '))
+
+num_hours = seconds // 3600
+num_minutes = (seconds % 3600) // 60
+num_seconds = seconds % 60
+
+print(f'Введено время: {num_hours}:{num_minutes}:{num_seconds}')
+print(f'В секундах: {num_hours * 3600 + num_minutes * 60 + num_seconds}')
