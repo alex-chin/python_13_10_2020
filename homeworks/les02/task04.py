@@ -4,3 +4,8 @@
 Если в слово длинное, выводить только первые 10 букв в слове.
 
 """
+
+text = input("Ведите предложение : ")
+words = text.split()
+for idx, word in enumerate(words, 1):
+    print(f'{idx}. {word[:10]}')
