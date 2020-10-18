@@ -7,15 +7,8 @@
 
 """
 
-digit = int(input('Введите число: '))  # воод цифры
+num1 = input('Введите число: ')  # воод ввод числа
 
-summa = 0  # общая сумма
-
-digits = digit * 10 ** 0  # вычисление чисел на основании цифры
-summa += digits
-digits += digit * 10 ** 1  # число равно n*10**0 + (n*10**0 + n*10**1) + (n*10**0 + n*10**1 + n*10**2)
-summa += digits
-digits += digit * 10 ** 2
-summa += digits
+summa = int(num1) + int(num1*2) + int(num1*3)
 
 print('Сумма чисел :', summa)
