@@ -10,5 +10,5 @@ num_hours = seconds // 3600
 num_minutes = (seconds % 3600) // 60
 num_seconds = seconds % 60
 
-print(f'Введено время: {num_hours}:{num_minutes}:{num_seconds}')
+print(f'Введено время: {num_hours:02}:{num_minutes:02}:{num_seconds:02}')
 print(f'В секундах: {num_hours * 3600 + num_minutes * 60 + num_seconds}')
