@@ -10,7 +10,6 @@ elements = input('Введите элементы через пробел : ').s
 
 for i in range(0, len(elements), 2):
     if (i + 1) < len(elements):
-        b = elements[i]
-        elements[i] = elements[i + 1]
-        elements[i + 1] = b
+        elements[i], elements[i + 1] = elements[i + 1], elements[i]  # !
+
 print(elements)
