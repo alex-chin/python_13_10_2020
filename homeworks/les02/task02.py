@@ -7,13 +7,8 @@
 """
 str_elem = None
 elements = []
-sym_stop = {'', ' ', 'q'}  # стоп символы
 
-while str_elem not in sym_stop:  # вводить элементы до стоп символов
-    str_elem = input('Введите элемент :')
-    if str_elem in sym_stop:  # запретить ввод стоп-символов
-        break
-    elements.append(str_elem)
+elements = input('Введите элементы через пробел : ').split()
 
 part_odd = elements[0::2]  # нечетные элементы
 part_even = elements[1::2]  # четные элементы
