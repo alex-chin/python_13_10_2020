@@ -5,22 +5,12 @@
 Для заполнения списка элементов необходимо использовать функцию input().
 
 """
-str_elem = None
-elements = []
 
 elements = input('Введите элементы через пробел : ').split()
 
-part_odd = elements[0::2]  # нечетные элементы
-part_even = elements[1::2]  # четные элементы
-list_pair = []
-
-for idx in range(len(part_even)):  # проход по количеству четных элементов
-    # собираем массив [четный, нечетный]
-    list_pair.append(part_even[idx])
-    list_pair.append(part_odd[idx])
-
-# список нечетный - добавить последний элемент из нечетного списка
-if len(elements) % 2:
-    list_pair.append(part_odd[-1])
-
-print(list_pair)
+for i in range(0, len(elements), 2):
+    if (i + 1) < len(elements):
+        b = elements[i]
+        elements[i] = elements[i + 1]
+        elements[i + 1] = b
+print(elements)
