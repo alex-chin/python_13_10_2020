@@ -8,7 +8,13 @@
 """
 
 num1 = input('Введите число: ')  # воод ввод числа
+num_digits = len(num1)
+num1 = int(num1)
+summa = 0  # общая сумма
+digits = 0
 
-summa = int(num1) + int(num1*2) + int(num1*3)
+for rank in range(0, 3 * num_digits, num_digits):
+    digits += num1 * 10 ** rank  #
+    summa += digits
 
 print('Сумма чисел :', summa)
