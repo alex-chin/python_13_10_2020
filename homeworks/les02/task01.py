@@ -7,4 +7,4 @@
 
 for _ in [None, ..., 1, True, 1.1, complex(5, 6), 'Hello', (1, 2, 3, ...), b'abc', [1, 2, 3], bytearray(b'abc'),
           {'a', 'b', 'c'}, frozenset({'a', 'b', 'c'}), {1: 'a', 2: 'b', 3: 'c'}]:
-    print('Тип данных :', type(_))
+    print('Тип данных :', type(_))  # !

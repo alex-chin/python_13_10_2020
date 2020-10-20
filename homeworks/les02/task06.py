@@ -34,7 +34,7 @@ for (num, elem) in goods:  # по всем записям
     for name, spec in elem.items():  # по всем характеристикам товара
         if name not in analytics:  # если характеристика отсутсвует
             analytics[name] = [spec]  # добавить новый узел
-        elif spec not in analytics[name]:  # если значение не ныйдено
+        elif spec not in analytics[name]:  # если значение не найдено
             analytics[name].append(spec)  # добавить новое значение в список
 
 print(analytics)

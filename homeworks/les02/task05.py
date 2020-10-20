@@ -13,6 +13,28 @@
 rating = [7, 5, 3, 3, 2]
 
 rate = int(input("Введите новый рейтинг : "))
-rating.append(rate)
-rating.sort(reverse=True)
+# rating.append(rate)
+# rating.sort(reverse=True)
+
+# обработка краевых вариантов: больше большего и меньше меньшего
+if rate >= rating[0]:
+    rating.insert(0, rate)
+elif rate <= rating[len(rating) - 1]:
+    rating.insert(len(rating), rate)
+else:
+    # !
+    # используется бинарный поиск
+    left = -1
+    right = len(rating)
+    while right > left + 1:
+        middle = (left + right) // 2
+        if rating[middle] == rate:
+            break;
+        if rating[middle] < rate:
+            right = middle
+        else:
+            left = middle
+    # вставка на ближайшее место
+    rating.insert(middle + 1, rate)
+
 print("Результат : ", rating)
