@@ -9,7 +9,7 @@
 elements = input('Введите элементы через пробел : ').split()
 
 for i in range(0, len(elements), 2):
-    if (i + 1) < len(elements):
+    if i < len(elements) - 1:
         elements[i], elements[i + 1] = elements[i + 1], elements[i]  # !
 
 print(elements)
