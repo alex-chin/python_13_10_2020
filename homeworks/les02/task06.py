@@ -22,12 +22,45 @@
 }
 """
 
-goods = [
-    (1, {'название': 'компьютер', 'цена': 20000, 'количество': 5, 'ед': 'шт.'}),
-    (2, {'название': 'принтер', 'цена': 6000, 'количество': 2, 'ед': 'шт.'}),
-    (3, {'название': 'сканер', 'цена': 2000, 'количество': 7, 'ед': 'шт.'})
-]
+# характеристики товара с типами
+goods_params = {
+    'название': 'str',
+    'цена': 'int',
+    'количество': 'int',
+    'ед': 'str'
+}
 
+stop_sym = ['', ' ', 'q']
+goods = []
+idx = 1
+param_value = None  # вводимое значение
+is_end = False
+print("Введите характеристики товара (пробел,q - выход)")
+
+while not is_end:
+    param_new = {}
+    for param_name, param_type in goods_params.items():
+        is_param_ok = False
+        param_value = ''
+        while not is_param_ok:  # ввод с преобразованием типов
+            param_value = input(f'{param_name} ({param_type}) : ')
+            is_param_ok = True
+            if param_type == 'int':
+                try:
+                    param_value = int(param_value)
+                except ValueError:
+                    is_param_ok = False
+                    print(f"Ошибка ввода, должен быть тип '{param_type}'. Повторите ввод. ")
+        param_new[param_name] = param_value  # собрать текущее описание товара
+        if param_value in stop_sym:
+            is_end = True
+            print("Ввод закончен.")
+            break
+    if is_end:
+        break
+    # print(param_new)
+    goods.append((idx, param_new))  # добавить запись о товаре
+    idx += 1# print(goods)
 analytics = {}
 
 for (num, elem) in goods:  # по всем записям
