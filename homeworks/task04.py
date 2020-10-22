@@ -7,3 +7,41 @@
 Первый — возведение в степень с помощью оператора **.
 Второй — более сложная реализация без оператора **, предусматривающая использование цикла.
 """
+
+
+def input_float(invite='Введите число : '):
+    # todo описание функции
+    buf = input(invite)
+    try:
+        return float(buf)
+    except ValueError:
+        print('Ошибка ввода. ')
+
+
+def input_int(invite='Введите число : '):
+    # todo описание функции
+    buf = input(invite)
+    try:
+        return int(buf)
+    except ValueError:
+        print('Ошибка ввода. ')
+
+
+def reverse_expo(x, neg_exp):
+    # todo описание функции
+    multi = x
+    for _ in my_range(1, abs(neg_exp) - 1):
+        multi *= x
+    return 1 / multi
+
+
+def my_range(start, end):
+    # todo описание функции
+    while start <= end:
+        yield start
+        start += 1
+
+
+x = input_float('Введите действительное положительное число : ')
+neg_exp = input_int('Введите целое отрицательное число : ')
+print('Результат', reverse_expo(x, neg_exp))

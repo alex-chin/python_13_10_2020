@@ -8,3 +8,17 @@
 то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
 
 """
+sym_stop = 'q'
+is_doing = True
+summa = 0
+while is_doing:
+    buf = input("Введите числа через пробел: ")
+    if buf[0] == sym_stop:
+        break
+    tokens = buf.split()
+    for word in tokens:
+        if word == sym_stop:
+            is_doing = False
+            break
+        summa += float(word)
+    print('Сумма : ', summa)

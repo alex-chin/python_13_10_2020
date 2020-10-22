@@ -5,6 +5,7 @@
 
 
 def input_float():
+    # todo описание функции
     buf = input('Введите число : ')
     try:
         return float(buf)
@@ -13,12 +14,11 @@ def input_float():
 
 
 def ai_divide(a, b):
+    # todo описание функции
     try:
         return a / b
     except ZeroDivisionError:
         return float('inf')
-    # except TypeError:
-    #     print('Введены неправильные данные')
 
 
 a = input_float()
