@@ -8,6 +8,7 @@
 
 
 def client_to_string(name, last_name, year_of_birth, email, phone):
+    """ Принимает данные клиента, печатает в строку"""
     print(f'{name} {last_name}, {year_of_birth} года рождения, контакты: {email}, {phone}')
 
 

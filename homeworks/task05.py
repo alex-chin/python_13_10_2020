@@ -8,16 +8,16 @@
 то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
 
 """
-sym_stop = 'q'
-is_doing = True
-summa = 0
+sym_stop = 'q'  # символ остановки
+is_doing = True  # флаг продолжения расчетов
+summa = 0  # сумма
 while is_doing:
     buf = input("Введите числа через пробел: ")
-    if buf[0] == sym_stop:
+    if buf[0] == sym_stop:  # первый символ стоп
         break
     tokens = buf.split()
     for word in tokens:
-        if word == sym_stop:
+        if word == sym_stop:  # проверяется наличие символа вместо числа
             is_doing = False
             break
         summa += float(word)

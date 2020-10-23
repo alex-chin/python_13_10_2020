@@ -11,15 +11,15 @@
 
 
 def int_func(text):
-    # todo описание функции
+    """ Делаеет первую букву прописной """
     return text[0].upper() + text[1:]
 
 
 buf = input("Введите слова через пробел: ")
-tokens = buf.split()
+tokens = buf.split()  # преобразование в список
 idx = 0
 buf = ''
 while idx < len(tokens):
-    buf += int_func(tokens[idx]) + ' '
+    buf += int_func(tokens[idx]) + ' '  # преобразование в строку
     idx += 1
 print(buf)

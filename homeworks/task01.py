@@ -5,7 +5,7 @@
 
 
 def input_float():
-    # todo описание функции
+    """ Запрашивает число у пользователя """
     buf = input('Введите число : ')
     try:
         return float(buf)
@@ -14,6 +14,7 @@ def input_float():
 
 
 def ai_divide(a, b):
+    """ Принимает два числа, возвращает результат деления """
     # todo описание функции
     try:
         return a / b

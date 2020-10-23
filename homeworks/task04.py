@@ -10,7 +10,6 @@
 
 
 def input_float(invite='Введите число : '):
-    # todo описание функции
     buf = input(invite)
     try:
         return float(buf)
@@ -19,7 +18,6 @@ def input_float(invite='Введите число : '):
 
 
 def input_int(invite='Введите число : '):
-    # todo описание функции
     buf = input(invite)
     try:
         return int(buf)
@@ -28,7 +26,7 @@ def input_int(invite='Введите число : '):
 
 
 def reverse_expo(x, neg_exp):
-    # todo описание функции
+    """ Вычисляет отцательную степень числа """
     multi = x
     for _ in my_range(1, abs(neg_exp) - 1):
         multi *= x
@@ -36,7 +34,7 @@ def reverse_expo(x, neg_exp):
 
 
 def my_range(start, end):
-    # todo описание функции
+    """ Реализация простого варианта функции range"""
     while start <= end:
         yield start
         start += 1
