@@ -12,7 +12,15 @@ from itertools import cycle
 
 
 def cyclone(c_list, n):
+    """
+    итератор на основе cycle с контролем общего количества в финальном списке
+    :param c_list: список для повторений
+    :param n: количество элементов
+    :return:
+    """
+
     def wrap(in_l, in_n):
+        # счетчик элементов
         i = 1
         gen = cycle(in_l)
         while i <= in_n:

@@ -9,7 +9,13 @@
 """
 
 
-def fact(n):
+def seq_fact(n):
+    """
+    итератор вычесления последжовательных n!
+    :param n:
+    :return: итератор
+    """
+
     def wrap(in_n):
         i = 1
         f = 1
@@ -21,5 +27,5 @@ def fact(n):
     return wrap(n)
 
 
-for el in fact(5):
+for el in seq_fact(5):
     print('Значение :', el)

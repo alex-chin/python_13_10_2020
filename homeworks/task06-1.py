@@ -8,3 +8,29 @@
 Например, в первом задании выводим целые числа, начиная с 3, а при достижении числа 10 завершаем цикл.
 Во втором также необходимо предусмотреть условие, при котором повторение элементов списка будет прекращено.
 """
+from itertools import count, cycle
+
+
+def iter_int(start, end):
+    """
+    Итератор на основе cycle с границей
+    :param start: начальное значение
+    :param end: конечное значение
+    :return:
+    """
+    # конфигурация итератора
+    gen = count(start)
+
+    def wrap(iter_gen):
+        i = next(iter_gen)
+        # контроль границ
+        while i <= end:
+            yield i
+            i = next(iter_gen)
+
+    # возврат итератора
+    return wrap(gen)
+
+
+iter1 = iter_int(3, 10)
+print("Последовательность :", list(iter1))
