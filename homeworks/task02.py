@@ -3,3 +3,9 @@
 количества слов в каждой строке.
 """
 
+with open('task02.txt', 'r', encoding='utf-8') as file:
+    i = 1
+    for line in file:
+        print(f"Строка-{i} слов в строке-{len(line.split())}")
+        i += 1
+    print("Всего строк :", i-1)
