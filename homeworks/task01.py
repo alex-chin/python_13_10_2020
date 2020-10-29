@@ -4,7 +4,7 @@
 """
 
 # если файл не существует - будет создан, если есть - перезапишется
-with open('task01.txt', 'w', encoding='utf-8') as f:
+with open('task01out.txt', 'w', encoding='utf-8') as f:
     while True:
         buf = input('Введите строку :')
         if buf.strip() == '':
