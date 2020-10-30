@@ -5,7 +5,11 @@
 import random
 
 with open('task05.txt', 'w', encoding='utf-8') as file:
-    rnd_int = [str(random.randint(100, 1000)) for i in range(100)]
-    file.write(' '.join(rnd_int))
+    # создать 1000 чисел
+    file.write(' '.join([str(random.randint(100, 1000)) for i in range(1000)]))
 with open('task05.txt', 'r', encoding='utf-8') as file:
-    pass
+    block = file.read()
+    file_sum = 0
+    for el in block.split():
+        file_sum += int(el)
+print("Сумма чисел в файле :", file_sum)

@@ -18,6 +18,6 @@ with open('task04out.txt', 'w', encoding='utf-8') as file:
     for line in lines:
         l_line = line.split()
         if len(l_line) == 3:
+            # поиск по ключу со значением по умолчанию
             l_line[0] = dict_int.get(l_line[0].lower(), '?????').title()
-            line = ' '.join(l_line)
-            file.write(line + '\n')
+            file.write(' '.join(l_line) + '\n')
