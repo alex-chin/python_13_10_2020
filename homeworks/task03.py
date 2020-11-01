@@ -13,11 +13,14 @@ name, surname, position (должность), income (доход).
 
 
 class Worker:
+    company = []
+
     def __init__(self, name, surname, position, income: dict):
         self.name = name
         self.surname = surname
         self.position = position
         self._income = income
+        self.company.append(self)
 
 
 class Position(Worker):
@@ -28,11 +31,9 @@ class Position(Worker):
         return self._income['wage'] + self._income['bonus']
 
 
-company = [
-    Position('Xander', 'Gibson', 'General Director', {"wage": 38224, "bonus": 4949}),
-    Position('Chaney', 'Petersen', 'R&D Director ', {"wage": 23411, "bonus": 1873}),
-    Position('Russell', 'Carney', 'Programmer', {"wage": 22922, "bonus": 2580})
-]
+Position('Xander', 'Gibson', 'General Director', {"wage": 38224, "bonus": 4949})
+Position('Chaney', 'Petersen', 'R&D Director ', {"wage": 23411, "bonus": 1873})
+Position('Russell', 'Carney', 'Programmer', {"wage": 22922, "bonus": 2580})
 
-for employee in company:
+for employee in Worker.company:
     print(employee.get_full_name(), employee.position, employee.get_total_income())
