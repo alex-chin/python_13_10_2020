@@ -7,3 +7,39 @@
 скорости. Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ к атрибутам,
 выведите результат. Выполните вызов методов и также покажите результат.
 """
+
+
+class Car:
+    def __init__(self, speed: int, color: str, name: str, is_police: bool):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        self.is_police = is_police
+
+    def go(self):
+        print('Вперед')
+
+    def stop(self):
+        print('Стоп')
+
+    def turn(self, side):
+        print(side)
+
+    def show_speed(self):
+        print(self.speed)
+
+
+class TownCar(Car):
+    pass
+
+
+class SportCar(Car):
+    pass
+
+
+class WorkCar(Car):
+    pass
+
+
+class PoliceCar(Car):
+    pass
