@@ -14,10 +14,24 @@ from time import sleep
 
 
 class TrafficLight:
+    chain_states = {'красный': 'желтый', 'желтый': 'зеленый', 'зеленый': 'красный'}
+    chain_prev = ''
+
     def __init__(self):
         self.__color = ''
 
+    def _check_color(self, color):
+        is_good = False
+        if self.chain_prev == '':
+            is_good = True
+        else:
+            is_good = (color == self.chain_states[self.chain_prev])
+        return is_good
+
     def _run(self, color, time):
+        if not self._check_color(color):
+            print(f'Неправильная последовательность переключения {self.chain_prev}->{color}')
+        self.chain_prev = color
         self.__color = color
         self._shine(time)
 
@@ -30,8 +44,8 @@ class TrafficLight:
 
     def running(self):
         self._run('красный', 7)
+        self._run('зеленый', 5)
         self._run('желтый', 2)
-
         self._run('зеленый', 5)
 
 
