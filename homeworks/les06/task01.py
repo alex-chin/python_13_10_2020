@@ -31,9 +31,11 @@ class TrafficLight:
     def _run(self, color, time):
         if not self._check_color(color):
             print(f'Неправильная последовательность переключения {self.chain_prev}->{color}')
+            return False
         self.chain_prev = color
         self.__color = color
         self._shine(time)
+        return True
 
     def _shine(self, time):
         print(self.__color, end='')
