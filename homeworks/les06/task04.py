@@ -4,7 +4,7 @@
 А также методы: go, stop, turn(direction), которые должны сообщать, что машина поехала, остановилась,
 повернула (куда).
 Опишите несколько дочерних классов: TownCar, SportCar, WorkCar, PoliceCar.
-Добавьте в базовый классметод show_speed, который должен показывать текущую скорость автомобиля.
+Добавьте в базовый класс метод show_speed, который должен показывать текущую скорость автомобиля.
 Для классов TownCar и WorkCar переопределите метод show_speed.
 При значении скорости свыше 60 (TownCar) и 40 (WorkCar) должно выводиться сообщение о превышении
 скорости.
@@ -29,7 +29,7 @@ class Car:
         print(side)
 
     def show_speed(self):
-        print(self.speed)
+        print(f'Скорость : {self.speed}')
 
 
 class TownCar(Car):
@@ -52,8 +52,41 @@ class WorkCar(Car):
 
 class PoliceCar(Car):
     def __init__(self, speed: int, color: str, name: str):
-        super().__init__(speed, speed, color, name)
+        super().__init__(speed, color, name)
         self.is_police = True
 
 
 t_car = TownCar(55, 'красная', 'Toyota')
+car = t_car
+print('--- машина')
+print(car.name, car.color, car.speed)
+car.show_speed()
+car.go()
+car.turn('налево')
+car.stop()
+
+s_car = SportCar(80, 'белая', 'Nissan')
+car = s_car
+print('--- машина')
+print(car.name, car.color, car.speed)
+car.show_speed()
+car.go()
+car.turn('налево')
+car.stop()
+
+w_car = WorkCar(50, 'коричневая', 'Ford')
+car = w_car
+print('--- машина')
+print(car.name, car.color, car.speed)
+car.show_speed()
+car.go()
+car.turn('налево')
+car.stop()
+
+p_car = PoliceCar(90, 'синяя', 'Ford')
+car = p_car
+print('--- машина')
+print(car.name, car.color, car.speed)
+car.go()
+car.turn('налево')
+car.stop()

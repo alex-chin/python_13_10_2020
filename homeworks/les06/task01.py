@@ -14,6 +14,7 @@ from time import sleep
 
 
 class TrafficLight:
+    # контрольный автомат состояний
     chain_states = {'красный': 'желтый', 'желтый': 'зеленый', 'зеленый': 'красный'}
     chain_prev = ''
 
@@ -25,6 +26,7 @@ class TrafficLight:
         if self.chain_prev == '':
             is_good = True
         else:
+            # контроль перехода состояний
             is_good = (color == self.chain_states[self.chain_prev])
         return is_good
 
@@ -41,15 +43,16 @@ class TrafficLight:
         print(self.__color, end='')
         for _ in range(time):
             sleep(1)
-            print('.', end='')
+            print('.', end='')  # иммитация периода действия цвета
         print('')
 
     def running(self):
-        self._run('красный', 7)
-        self._run('зеленый', 5)
-        self._run('желтый', 2)
-        self._run('зеленый', 5)
+        for color, time in [('красный', 7), ('желтый', 2), ('зеленый', 5), ('зеленый', 5)]:
+            if not self._run(color, time):
+                print('Установлена неправильная последовательность')
+                break
 
 
-light_1 = TrafficLight()
-light_1.running()
+if __name__ == '__main__':
+    light_1 = TrafficLight()
+    light_1.running()

@@ -17,14 +17,23 @@ class Stationery:
 
 class Pen(Stationery):
     def draw(self):
-        print('Ручка пишет')
+        print(f'Ручка {self.title} пишет')
 
 
 class Pencil(Stationery):
     def draw(self):
-        print('Карандаш рисует')
+        print(f'Карандаш {self.title} рисует')
 
 
 class Handle(Stationery):
     def draw(self):
-        print('Маркер помечает')
+        print(f'Маркер {self.title} помечает')
+
+
+if __name__ == '__main__':
+    pen = Pen('Kaweco')
+    pen.draw()
+    pencil = Pencil('Koh-i-noor')
+    pencil.draw()
+    handle = Handle('Centropen')
+    handle.draw()

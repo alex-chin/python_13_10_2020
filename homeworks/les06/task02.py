@@ -15,7 +15,7 @@ class Road:
         self._length = length
         self._width = width
 
-    def mass_asphalt(self, depth):
+    def mass_asphalt(self, depth=1):
         return self._length * self._width * self._mass_asphalt_m2 * depth
 
 
