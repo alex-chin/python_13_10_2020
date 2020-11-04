@@ -56,37 +56,14 @@ class PoliceCar(Car):
         self.is_police = True
 
 
-t_car = TownCar(55, 'красная', 'Toyota')
-car = t_car
-print('--- машина')
-print(car.name, car.color, car.speed)
-car.show_speed()
-car.go()
-car.turn('налево')
-car.stop()
+if __name__ == '__main__':
 
-s_car = SportCar(80, 'белая', 'Nissan')
-car = s_car
-print('--- машина')
-print(car.name, car.color, car.speed)
-car.show_speed()
-car.go()
-car.turn('налево')
-car.stop()
+    for car in [TownCar(55, 'красная', 'Toyota'), SportCar(80, 'белая', 'Nissan'), WorkCar(50, 'коричневая', 'Ford'),
+                PoliceCar(90, 'синяя', 'Ford')]:
+        print('--- машина')
+        print(car.name, car.color, car.speed)
+        car.show_speed()
+        car.go()
+        car.turn('налево')
+        car.stop()
 
-w_car = WorkCar(50, 'коричневая', 'Ford')
-car = w_car
-print('--- машина')
-print(car.name, car.color, car.speed)
-car.show_speed()
-car.go()
-car.turn('налево')
-car.stop()
-
-p_car = PoliceCar(90, 'синяя', 'Ford')
-car = p_car
-print('--- машина')
-print(car.name, car.color, car.speed)
-car.go()
-car.turn('налево')
-car.stop()

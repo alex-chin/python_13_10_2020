@@ -31,11 +31,12 @@ class Position(Worker):
         return self._income['wage'] + self._income['bonus']
 
 
-Position('Xander', 'Gibson', 'General Director', {"wage": 38224, "bonus": 4949})
-Position('Chaney', 'Petersen', 'R&D Director ', {"wage": 23411, "bonus": 1873})
-Position('Russell', 'Carney', 'Programmer', {"wage": 22922, "bonus": 2580})
-Position('Oren', 'Chase', 'Programmer', {"wage": 27353, "bonus": 1766})
-Position('Stuart', 'Palmer', 'Data Scientist', {"wage": 34114, "bonus": 1174})
+if __name__ == '__main__':
+    Position('Xander', 'Gibson', 'General Director', {"wage": 38224, "bonus": 4949})
+    Position('Chaney', 'Petersen', 'R&D Director ', {"wage": 23411, "bonus": 1873})
+    Position('Russell', 'Carney', 'Programmer', {"wage": 22922, "bonus": 2580})
+    Position('Oren', 'Chase', 'Programmer', {"wage": 27353, "bonus": 1766})
+    Position('Stuart', 'Palmer', 'Data Scientist', {"wage": 34114, "bonus": 1174})
 
-for employee in Worker.company:
-    print(f'{employee.get_full_name():15} {employee.position:17} {employee.get_total_income():5.2f}')
+    for employee in Worker.company:
+        print(f'{employee.get_full_name():15} {employee.position:17} {employee.get_total_income():5.2f}')

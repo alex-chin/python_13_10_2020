@@ -19,5 +19,6 @@ class Road:
         return self._length * self._width * self._mass_asphalt_m2 * depth
 
 
-near_road = Road(1000, 24)
-print('Масса асфальта', near_road.mass_asphalt(8))
+if __name__ == '__main__':
+    near_road = Road(1000, 24)
+    print('Масса асфальта', near_road.mass_asphalt(8))
