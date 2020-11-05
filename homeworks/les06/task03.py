@@ -14,6 +14,7 @@ name, surname, position (должность), income (доход).
 
 class Worker:
     company = []
+    _income = {"wage": 0, "bonus": 0}
 
     def __init__(self, name, surname, position, income: dict):
         self.name = name
