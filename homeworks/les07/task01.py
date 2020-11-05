@@ -12,8 +12,8 @@
 class Matrix:
     data = [[]]
 
-    def __init__(self, rowcol):
-        self.data = rowcol
+    def __init__(self, matrix_row_col):
+        self.data = matrix_row_col
 
     def __str__(self):
         buf = ''
@@ -23,7 +23,22 @@ class Matrix:
             buf += '\n'
         return buf
 
+    def __add__(self, other):
+        r_list = []
+        for r_idx in range(len(self.data)):
+            c_list = []
+            for c_idx in range(len(self.data[0])):
+                c_list.append(self.data[r_idx][c_idx] + other.data[r_idx][c_idx])
+            r_list.append(c_list)
+        return Matrix(r_list)
+
 
 if __name__ == '__main__':
     m = Matrix([[145.7, 2, 3], [4, 665, 6.4]])
     print(m)
+    m1 = Matrix([[10, 20], [233, 90]])
+    print(m1)
+    m2 = Matrix([[10, 200], [30, 24]])
+    print(m2)
+    m3 = m1 + m2
+    print(m3)
