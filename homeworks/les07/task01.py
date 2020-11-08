@@ -7,19 +7,22 @@
 Результатом сложения должна быть новая матрица.
 Подсказка: сложение элементов матриц выполнять поэлементно — первый элемент первой строки
 первой матрицы складываем с первым элементом первой строки второй матрицы и т.д. """
+import itertools
 
 
 class Matrix:
-    data = [[]]
+    data = [[]]  # матрица как список строк
 
     def __init__(self, matrix_row_col):
         self.data = matrix_row_col
 
     def __str__(self):
+
         buf = ''
+        pos = len(str(max(itertools.chain(*self.data)))) + 1
         for row in self.data:
             for el in row:
-                buf += f'{el:5}'
+                buf += f'{el:{pos}}'
             buf += '\n'
         return buf
 
@@ -34,9 +37,9 @@ class Matrix:
 
 
 if __name__ == '__main__':
-    m = Matrix([[145.7, 2, 3], [4, 665, 6.4]])
+    m = Matrix([[145, 2, 3], [4, 665, 6]])
     print(m)
-    m1 = Matrix([[10, 20], [233, 90]])
+    m1 = Matrix([[10, 20], [23333, 90]])
     print(m1)
     m2 = Matrix([[10, 200], [30, 24]])
     print(m2)

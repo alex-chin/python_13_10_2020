@@ -22,34 +22,83 @@
 15, количество ячеек в ряду — 5. Тогда метод make_order() вернет строку: *****\n*****\n*****. Подсказка: подробный
 список операторов для перегрузки доступен по ссылке. """
 
+
 class Cell:
     def __init__(self, num_units):
-        self.num_units = num_units
+        if num_units > 0:
+            self.num_units = num_units
+        else:
+            raise ValueError('Organic creation is not allowed')
+
     def __add__(self, other):
         """ Объединение двух клеток.
         При этом число ячеек общей клетки должно равняться сумме ячеек исходных двух клеток.
-        :param other:
-        :return:
+        Cell + Cell
+        :param other: Cell
+        :return: new Cell
         """
-        pass
+        return Cell(self.num_units + other.num_units)
+
     def __sub__(self, other):
         """ Участвуют две клетки. Операцию необходимо выполнять только
         если разность количества ячеек двух клеток больше нуля, иначе выводить соответствующее сообщение.
-        :param other:
-        :return:
+        Cell - Cell
+        :param other: Cell
+        :return: new Cell
         """
-        pass
+        difference = self.num_units - other.num_units
+
+        if difference > 0:
+            return Cell(difference)
+        else:
+            raise ValueError('Organic operation is not allowed')
+
     def __mul__(self, other):
         """ Создается общая клетка из двух.
         Число ячеек общей клетки определяется как произведение количества ячеек этих двух клеток.
         :param other:
         :return:
         """
-        pass
+        return Cell(self.num_units * other.num_units)
+
     def __truediv__(self, other):
         """ Создается общая клетка из двух.
         Число ячеек общей клетки определяется как целочисленное деление количества ячеек этих двух клеток.
         :param other:
         :return:
         """
-        pass
+        division = self.num_units // other.num_units
+        if division > 0:
+            return Cell(division)
+        else:
+            raise ValueError('Organic operation is not allowed')
+
+    def make_order(self, num_el):
+        # соединить сгенерированные части плюс остаток
+        return '\n'.join(['n' * num_el for _ in range(self.num_units // num_el)] + ['n' * (self.num_units % num_el)])
+
+
+if __name__ == '__main__':
+    cols = 10
+
+    c1 = Cell(15)
+    print('Cell(15)')
+    print(c1.make_order(cols))
+
+    c2 = Cell(12)
+    print('Cell(12)')
+    print(c2.make_order(cols))
+
+    c3 = c1 + c2
+    print('Cell(15) + Cell(12)')
+    print(c3.make_order(cols))
+
+    c3 = c1 - c2
+    print('Cell(15) - Cell(12)')
+    print(c3.make_order(cols))
+
+    c3 = c1 / c2
+    print('Cell(15) / Cell(12)')
+    print(c3.make_order(cols))
+
+    c3 = c2 - c1
