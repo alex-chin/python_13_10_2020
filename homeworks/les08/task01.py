@@ -23,6 +23,8 @@ class MyDate:
             self.is_leap = MyDate.is_leap_year(self._year)
         else:
             raise ValueError('My date structure (year) is incorrect')
+        if not MyDate.check_date(self._day, self._month, self._year):
+            raise ValueError('The data for date is not allowed')
 
     @staticmethod
     def is_leap_year(year):
@@ -51,19 +53,44 @@ class MyDate:
 
     @classmethod
     def set_date(cls, str_date: str):
+        """
+        Извлекает число, месяц, год и возвращает объект с данными типа int
+        :param str_date:
+        :return:
+        """
         return cls(str_date)
 
     @staticmethod
-    def check_date(date, month, year):
+    def check_date(date, month, year, verbose=False):
+        """
+        Проверяет детально дату включая максимальную дату месяца с учетом високосных лет
+        :param date:
+        :param month:
+        :param year:
+        :param verbose:
+        :return:
+        """
         is_ok = False
+        if verbose:
+            print(f'{date} - {month} - {year}')
         if 1 <= month <= 12:
             is_ok = True
+        elif verbose:
+            print('the month is wrong number')
         if is_ok:
             is_ok = date <= MyDate.__months[month + 1]
+            if not is_ok and verbose:
+                print('the day is wrong number of month')
         if is_ok:
             is_ok = MyDate._is_ok_year(year)
+            if not is_ok and verbose:
+                print('the year is not belong to correct period')
         if is_ok and month == 2:
             is_ok = not MyDate.is_leap_year(year) and date <= 28
+            if not is_ok and verbose:
+                print('the day of Feb is wrong')
+        if verbose:
+            print(f' date is {"ok" if is_ok else "wrong"}')
         return is_ok
 
     @staticmethod
@@ -74,6 +101,26 @@ class MyDate:
         #  принимает дату в виде строки формата «день-месяц-год».
         self._day, self._month, self._year = tuple(map(int, str_date.split('-')))
 
-d1 = MyDate.check_date(13,2,1977)
-d1 = MyDate.check_date(13,2,1967)
-print(1)
+    @property
+    def day(self):
+        return self._day
+
+    @property
+    def month(self):
+        return self._month
+
+    @property
+    def year(self):
+        return self._year
+
+
+if __name__ == '__main__':
+    d1 = MyDate.check_date(13, 2, 1977, verbose=True)
+    d2 = MyDate.check_date(13, 2, 1967, verbose=True)
+    d3 = MyDate.check_date(30, 2, 1977, verbose=True)
+    d4 = MyDate.check_date(29, 2, 2000, verbose=True)
+
+    D1 = MyDate.set_date('13-02-1977')
+    print(f'D1: {D1.day} {D1.month} {D1.year}')
+    D2 = MyDate('13-02-1977')
+    print(f'D2: {D2.day} {D2.month} {D2.year}')
