@@ -18,7 +18,7 @@ class MyDate:
         :param str_date:
         """
 
-        self.build_date(str_date)
+        self._build_date(str_date)
         if MyDate._is_ok_year(self._year):
             self.is_leap = MyDate.is_leap_year(self._year)
         else:
@@ -95,9 +95,10 @@ class MyDate:
 
     @staticmethod
     def _is_ok_year(year):
+        # мои правила проверки года
         return 1970 <= year <= 2060
 
-    def build_date(self, str_date):
+    def _build_date(self, str_date):
         #  принимает дату в виде строки формата «день-месяц-год».
         self._day, self._month, self._year = tuple(map(int, str_date.split('-')))
 

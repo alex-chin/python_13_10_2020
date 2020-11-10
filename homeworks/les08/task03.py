@@ -7,3 +7,26 @@
 реализовать проверку типа элемента и вносить его в список, только если введено число. Класс-исключение должен не
 позволить пользователю ввести текст (не число) и отобразить соответствующее сообщение. При этом работа скрипта не
 должна завершаться. """
+
+
+class MyOnlyIntError(Exception):
+    def __init__(self, message='Ошибка: должно быть число'):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+
+if __name__ == '__main__':
+    int_list = []
+    while True:
+        buf = input('Введите данные:')
+        if buf == 'stop':
+            break
+        try:
+            if not buf.isdigit():
+                raise MyOnlyIntError
+            int_list.append(int(buf))
+        except MyOnlyIntError as e:
+            print(e)
+    print(int_list)
