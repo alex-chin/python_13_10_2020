@@ -2,47 +2,90 @@
 для указания количества принтеров, отправленных на склад, нельзя использовать строковый тип данных. Подсказка:
 постарайтесь по возможности реализовать в проекте «Склад оргтехники» максимум возможностей, изученных на уроках по ООП.
 """
-import json
+import datetime
 
 
 class WarehouseEquipments:
-    shelf = {}
-    in_work = {}
+    """ Класс реализации склада
+    """
+    shelf = {}  # склад
+    in_work = {}  # выдано
+    log = []  # журнал
     __current_num = 1000
 
-    def __init__(self, shelf={}):
+    def __init__(self, shelf=None):
+        if shelf is None:
+            shelf = {}
         self.take_storage_equipments(shelf)
 
     def take_storage_equipments(self, equipments):
+        """Принять на хранение списком
+        :param equipments:
+        :return:
+        """
         for machine in equipments:
             self.take_storage(machine)
 
     def take_storage(self, equipment):
+        """Принять на хранение
+        :param equipment:
+        :return:
+        """
         if isinstance(equipment, OfficeEquipment):
             for _ in range(equipment.number):
                 self.__current_num += 1
                 equipment.inventory_number = self.__current_num
                 self.shelf[self.__current_num] = equipment
+                self.log_operation('Прием', equipment)
 
     def find_by_inventory(self, number):
+        """Найти по Инв
+        :param number:
+        :return:
+        """
         return self.shelf[number]
 
     def move_in_work(self, inventory, division):
-        self.in_work[inventory] = (self.shelf[inventory], division)
+        """Выдать в подразделение
+        :param inventory:
+        :param division:
+        :return:
+        """
+        equipment = self.shelf[inventory]
+        self.in_work[inventory] = (equipment, division)
         del (self.shelf[inventory])
+        self.log_operation('Выдано', equipment, division=division)
 
     def move_in_shelf(self, inventory):
-        self.shelf[inventory], _ = self.in_work[inventory]
+        """Вернуть на склад
+        :param inventory:
+        :return:
+        """
+        equipment, _ = self.in_work[inventory]
+        self.shelf[inventory] = equipment
         del (self.in_work[inventory])
+        self.log_operation('Возврат', equipment)
 
     def print_shelf(self):
         for inventory, equipment in self.shelf.items():
-            print(f'{inventory} {equipment.type} {equipment.brand} {equipment.model}')
+            print(equipment)
 
     def print_in_work(self):
         for inventory, (equipment, division) in self.in_work.items():
-            print(f'{inventory} {equipment.type} {equipment.brand} {equipment.model}  {division}')
+            print(f'{equipment} {division}')
 
+    def log_operation(self, operation, equipment, division=''):
+        """Логирование операции
+        :param operation:
+        :param equipment:
+        :param division:
+        :return:
+        """
+        self.log.append(f' {datetime.datetime.now().isoformat()} - {operation} : {equipment} {division}')
+
+    def log_print(self):
+        for line in self.log:
+            print(line)
 
 
 class OfficeEquipment:
@@ -54,11 +97,15 @@ class OfficeEquipment:
     place = (0, 0)
     is_network = False
     number = 0
+    type = ''
 
     def __init__(self, brand, model, number=1):
         self.brand = brand
         self.model = model
         self.number = number
+
+    def __str__(self):
+        return f'{self.inventory_number} {self.type} {self.brand} {self.model}'
 
 
 class Printer(OfficeEquipment):
@@ -82,42 +129,40 @@ class MenuController:
 
     def __init__(self, wh: WarehouseEquipments):
         self.__WH = wh
-        self.builder = [None, Printer, Scanner, CopyMachine]
-        self.action = [self.flag_exit,
-                       self.refresh, self.add_equipment, self.move_in_work, self.move_shelf, self.dump]
+        self.builder = [None, Printer, Scanner, CopyMachine]  # Создать Об по типу
+        # меню операций
+        self.action = [lambda: True,
+                       self.refresh, self.add_equipment, self.move_in_work, self.move_shelf, self.log_print]
 
     def run(self):
+        """ Главный цикл приложения
+        :return:
+        """
         while True:
-            self.action[1]()
-            key = self.print_menu()
-            if self.action[key]():
+            self.action[1]()  # обновить экран
+            if self.action[self.print_menu()]():
                 break
 
-    def flag_exit(self):
-        return True;
+    def log_print(self):
+        print('=== Журнал операций')
+        self.__WH.log_print()
 
     def print_menu(self):
-        print('1 - Обновить')
-        print('2 - Добавить')
-        print('3 - Выдать')
-        print('4 - Принять')
+        print('1 - Обновить | 2 - Добавить | 3 - Выдать | 4 - Принять')
         print('-----------')
-        print('5 - Дамб')
-
+        print('5 - Журнал операций')
         print('0 - Выход')
-        key = input('? :')
-        return int(key)
-
-    def dump(self):
-        print(json.dumps(self.__WH.shelf))
-        print(json.dumps(self.__WH.in_work))
+        return self.input_int('? :')
 
     def refresh(self):
         print('=== Cocтояние склада')
         self.__WH.print_shelf()
+        print(f'=== Итого: {len(self.__WH.shelf)}')
         print('')
         print('=== Выдано')
         self.__WH.print_in_work()
+        print(f'=== Итого: {len(self.__WH.in_work)}')
+        print('')
         return False
 
     def add_equipment(self):
@@ -125,13 +170,13 @@ class MenuController:
         type_eq = input('Модель (1-Принтер, 2-Сканер, 3-Копир) :')
         brand = input('Бренд :')
         model = input('Модель:')
-        number = input('Количество :')
+        number = self.input_int('Количество :')
         eq = self.builder[int(type_eq)](brand, model, int(number))
         self.__WH.take_storage(eq)
         return False
 
     def move_in_work(self):
-        inventory = input('ВВедите инв N :')
+        inventory = self.input_int('ВВедите инв N :')
         division = input('Введите отдел :')
         self.__WH.move_in_work(int(inventory), division)
         return False
@@ -141,8 +186,19 @@ class MenuController:
         self.__WH.move_in_shelf(int(inventory))
         return False
 
+    @staticmethod
+    def input_int(text):
+        while True:
+            buf = input(text)
+            if buf.isdigit():
+                return int(buf)
+
 
 class SideKick:
+    """
+    Наполнение склада
+    """
+
     @staticmethod
     def full_wh(wh: WarehouseEquipments):
         sc_1 = Scanner('Canon', 'CanoScan LiDE 400')
@@ -154,7 +210,12 @@ class SideKick:
         cp_1 = CopyMachine('Xerox', 'B1022')
         cp_2 = CopyMachine('Xerox', 'B215')
         cp_3 = CopyMachine('Konica-Minolta', 'A0XY026')
-        wh1.take_storage_equipments([sc_1, sc_2, sc_3, pr_1, pr_2, pr_3])
+        wh.take_storage_equipments([sc_1, sc_2, sc_3, pr_1, pr_2, pr_3, cp_1, cp_3, cp_2])
+        wh.move_in_work(1005, 'Secretary')
+        wh.move_in_work(1006, 'Secretary')
+        wh.move_in_work(1007, 'R&D')
+        wh.move_in_shelf(1005)
+        wh.move_in_shelf(1006)
 
 
 if __name__ == '__main__':

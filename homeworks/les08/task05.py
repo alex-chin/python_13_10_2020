@@ -8,7 +8,7 @@ class WarehouseEquipments:
     in_work = {}
     __current_num = 1000
 
-    def __init__(self, shelf={}):
+    def __init__(self, shelf=None):
         self.take_storage_equipments(shelf)
 
     def take_storage_equipments(self, equipments):
